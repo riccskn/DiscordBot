@@ -21,8 +21,6 @@ class EventListener : ListenerAdapter() {
 
         val executator = Executors.newScheduledThreadPool(1)
 
-
-
         val task = Runnable {
 
             val client = HttpClient.newBuilder().build()
@@ -36,11 +34,9 @@ class EventListener : ListenerAdapter() {
 
             val responseObject = gson.fromJson(response.body(),JsonObject::class.java)
 
-           // println("Total de jogadores: "+responseObject.get("players").asJsonObject.get("online").asInt)
-
             val players = responseObject.get("players").asJsonObject.get("online").asInt
 
-            event.jda.presence.setPresence(Activity.playing("com $players jogadores"),false)
+            event.jda.presence.setPresence(Activity.playing("With $players players"),false)
 
         }
 
